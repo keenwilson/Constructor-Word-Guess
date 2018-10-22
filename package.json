@@ -1,0 +1,33 @@
+{
+  "name": "constructor-word-guess",
+  "version": "1.0.0",
+  "description": "A word guess command-line (CLI) game using constructor functions to create objects representing each word to guess as well as each letter in each word",
+  "main": "letter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keenwilson/Constructor-Word-Guess.git"
+  },
+  "keywords": [
+    "constructor",
+    "word",
+    "guess",
+    "cli",
+    "game",
+    "javascript",
+    "npm",
+    "node.js"
+  ],
+  "author": "Keen Wilson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keenwilson/Constructor-Word-Guess/issues"
+  },
+  "homepage": "https://github.com/keenwilson/Constructor-Word-Guess#readme",
+  "dependencies": {
+    "inquirer": "^6.2.0",
+    "prompt": "^1.0.0"
+  }
+}
