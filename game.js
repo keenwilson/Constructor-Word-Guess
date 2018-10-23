@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const c = require('ansi-colors');
 const Word = require("./Word");
 const words = require("./words");
+const Pizza = require("./pizza");
 
 // The Game constructor is used to track score and control the flow of the overall game.
 function Game() {
@@ -18,6 +19,10 @@ function Game() {
 
     
     this.newWord = function () {
+
+        var pizza = new Pizza();
+
+        console.log(`${pizza.emoji} ${pizza.emoji} ${pizza.emoji} Deliciously Popular Pizza Toppings ${pizza.emoji} ${pizza.emoji} ${pizza.emoji}`);
         // Random a word from words.js
         var randomWord = words[Math.floor(Math.random() * words.length)];
         // Creates a new Word object using a random word from the array
@@ -40,10 +45,11 @@ function Game() {
                 // Ask if they want to start over
                 self.askToStartOver();
 
-                // If the user guessed all letters of the current word correctly, reset guessesLeft to 10 and get the next word
+                
             }
             else if (self.currentWord.guessedCorrectly()) {
-                console.log(c.green("You got it right! Next word!"));
+                // If the user guessed all letters of the current word correctly, reset guessesLeft to 10 and get the next word
+                console.log(c.green(" You got it right. The answer is " + self.currentWord.getSolution() + "! \n Next word! \n\n"));
                 // Update guess remaining for the current user to 10
                 self.guessesRemaining = 10;
                 // Create a new Word object
@@ -96,15 +102,14 @@ function Game() {
             ])
             .then(function (val) {
                 // If the user's guess is in the current word, log that they chose correctly
-                console.log("You have guessed " + c.bgCyan(" " + val.choice + " "));
+                console.log("You have guessed " + c.bgCyan(" " + val.choice.toUppercase() + " "));
                 var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
                 if (didGuessCorrectly) {
                     console.log(c.bold.bgGreen("\nCORRECT!!!\n"));
-
-                    // Otherwise decrement `guessesLeft`, and let the user know how many guesses they have left
                 }
                 else {
-                    
+                    // Otherwise decrement `guessesRemaining`, log that the answer is incorrect,
+                    // and display how many guesses remaining
                     self.guessesRemaining--;
                     console.log(c.bold.bgRed("\nINCORRECT!!!\n"));
                     console.log(c.inverse(self.guessesRemaining + " guesses remaining!!!\n"));
@@ -120,8 +125,6 @@ function Game() {
         // Node.js interprets non-zero codes as failure, and an exit code of 0 as success.
         process.exit(0);
     };
-
-
 
 
 } // End the Game constructor

@@ -15,13 +15,6 @@ function Word (word) {
 // Setting the method for all Word objects on the protoype
 // ==================================================================================
 
-Word.prototype.getSolution = function () {
-    return this.letters.map(function (letter) {
-        // Call the underlying characters and join them together
-        return letter.getSolution();
-    }).join("");
-};
-
 // Word.prototype.toString() returns a string representing the word.
 // Because we name a function `toString`, JavaScript automatically call `toString` on each letter, 
 // then joins them together even if we don't call toString
@@ -51,6 +44,15 @@ Word.prototype.guessedCorrectly = function () {
     return this.letters.every(function (letter) {
         return letter.visible;
     });
+};
+
+
+// Get the underlying characters in order to show the user the correct word
+Word.prototype.getSolution = function () {
+    return this.letters.map(function (letter) {
+        // Call the underlying characters and join them together
+        return letter.getSolution();
+    }).join("");
 };
 
 module.exports = Word;

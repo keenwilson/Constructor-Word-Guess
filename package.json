@@ -2,7 +2,7 @@
   "name": "constructor-word-guess",
   "version": "1.0.0",
   "description": "A word guess command-line (CLI) game using constructor functions to create objects representing each word to guess as well as each letter in each word",
-  "main": "letter.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
