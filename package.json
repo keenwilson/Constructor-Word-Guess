@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/keenwilson/Constructor-Word-Guess#readme",
   "dependencies": {
+    "ansi-colors": "^3.2.1",
     "inquirer": "^6.2.0",
     "prompt": "^1.0.0"
   }
