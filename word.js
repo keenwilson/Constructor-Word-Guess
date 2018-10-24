@@ -25,11 +25,11 @@ Word.prototype.toString = function () {
 };
 
 // Word.prototype.guessLetter takes a character as an argument and 
-// calls the guess function on each letter object to see whether that letter has been guessed yet
-Word.prototype.guessLetter = function (character) {
+// calls the beenGuessed function on the letter object to see whether that letter has been guessed yet
+Word.prototype.beenGuessedLetter = function (character) {
     var alreadyGuessed = false;
     this.letters.forEach(function (letter) {
-        if (letter.guess(character) === true) {
+        if (letter.beenGuessed(character) === true) {
             alreadyGuessed = true;
         }
     });
@@ -42,7 +42,7 @@ Word.prototype.guessLetter = function (character) {
 // Word.prototype.guessedCorrectly returns `true` if all letters in the word have been guessed.
 Word.prototype.guessedCorrectly = function () {
     return this.letters.every(function (letter) {
-        return letter.visible;
+        return letter.active;
     });
 };
 

@@ -6,9 +6,10 @@ function Letter (character) {
     // Uses literal notation to construct a RegExp object 
     // /[a-zA-Z]/ specifies word character.
     // The modifier i after the regex specifies case-insensitive matching.
-    // If a character is not a letter, make it visible
-    // First set this.visible equal to `false` so that it appears as a placeholder on CLI 
-    this.visible = !/[a-zA-Z]/i.test(character);
+    // If a character is not a letter, make it active 
+    // Letter.active is a boolean 
+    // First set this.active equal to `false` so that it appears as a placeholder on command line
+    this.active = !/[a-zA-Z]/i.test(character);
 
     // Store the underlying character for the letter
     this.character = character;
@@ -23,22 +24,24 @@ function Letter (character) {
 // Name a letter's display function `toString`
 // When concatenating with a string, JavaScript automatically call `toString`
 Letter.prototype.toString = function() {
-    // If this letter has been guessed, display an underlying character on the CLI.
-    if (this.visible === true) {
+    
+    if (this.active === true) {
+        // If this letter has been guessed correctly, display an underlying character on the CLI.
         return this.character.toUpperCase();
     }
+    // 
     return "_";
 }
 
 // Letter.prototype.guess is a boolean value that stores whether that letter has been guessed yet
 // ==================================================================================
-Letter.prototype.guess = function(characterGuess) {
+Letter.prototype.beenGuessed = function(characterGuess) {
 
     // A function that takes a character as an argument and checks it against the underlying character
     if (characterGuess.toUpperCase() === this.character.toUpperCase()) {
         // The user guesses this character correctly. 
-        // Update this.visible to `true`, which will display an underlying character.
-        this.visible = true;
+        // Update this.active to `true`, which will display an underlying character.
+        this.active = true;
         return true;
     }
     

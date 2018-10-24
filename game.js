@@ -42,7 +42,7 @@ function Game() {
     // Uses inquirer to prompt the user for their guess
     this.makeGuess = function () {
         console.log("\n" + this.currentWord + "\n");
-        this.guessLetter().then(function () {
+        this.guessALetter().then(function () {
             // If the user has no guesses remaining after this guess, , 
             if (self.guessesRemaining < 1) {
                 // Show the user the correct word
@@ -97,8 +97,8 @@ function Game() {
             });
     };
 
-    // Prompts the user for a letter
-    this.guessLetter = function () {
+    // Game.guessALetter prompts the user for a letter
+    this.guessALetter = function () {
         return inquirer
             .prompt([
                 {
@@ -121,7 +121,7 @@ function Game() {
 
 
                 // If the letter the user are trying to guess is in the current word, log that they are CORRECT
-                var isCorrect = self.currentWord.guessLetter(userGuess);
+                var isCorrect = self.currentWord.beenGuessedLetter(userGuess);
                 if (isCorrect) {
                     console.log(boxen(c.bold.green("\nCORRECT!!!\n"), {padding: 1, margin: 1, borderStyle: 'round'}));
                 }
@@ -158,4 +158,5 @@ function Game() {
 
 } // End the Game constructor
 
+//Export the Game constructor so that we can use/reference it in index.js
 module.exports = Game;

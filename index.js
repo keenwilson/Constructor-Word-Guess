@@ -15,7 +15,7 @@ figlet("Word Guess Game", function(err, data) {
     }
     console.log(data)
 
-    // The playGame method is called when the file first loads.
+    // The playGame method of the Game constructor is called when the file first loads.
     game.playGame()
 });
 

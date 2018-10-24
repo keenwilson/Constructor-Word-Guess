@@ -8,8 +8,9 @@ A Word Guess command-line (*CLI*) game using constructor functions to create obj
 * Letter
     * The Letter module is a constructor function for displaying either an underscore or the underlying character for each letter in the word depending on whether or not the user has guessed the letter.
     * The Letter constructor has the following properties and methods: 
-    * `visible`: 
+    * `active`: 
     * `character`: Store the underlying character for the letter
+    * `showCharacter`:
 * Game
     * The Game module is a constructor function with the following properties and methods: 
         * `playGame`: 

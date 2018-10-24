@@ -1,5 +1,6 @@
 // Deliciously Popular Pizza Toppings
 
+// Export the word list so that we can use it in game.js
 module.exports = [
     "Pepperoni"
     ,"Mushrooms"
