@@ -3,7 +3,6 @@ function Pizza() {
     this.pizzalog = function() {
         console.log.bind(console, '🍕')
     }
-   
 }
 
 module.exports = Pizza;

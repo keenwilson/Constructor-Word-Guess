@@ -1,17 +1,17 @@
 // The Letter constructor is used to display either an underscore 
 // or the underlying character for each letter in the word
 // depending on whether or not the user has guessed the letter
-function Letter (char) {
+function Letter (character) {
 
     // Uses literal notation to construct a RegExp object 
     // /[a-zA-Z]/ specifies word character.
     // The modifier i after the regex specifies case-insensitive matching.
     // If a character is not a letter, make it visible
     // First set this.visible equal to `false` so that it appears as a placeholder on CLI 
-    this.visible = !/[a-zA-Z]/i.test(char);
+    this.visible = !/[a-zA-Z]/i.test(character);
 
     // Store the underlying character for the letter
-    this.char = char;
+    this.character = character;
 }
 
 // Setting the method for all Letter objects on the protoype
@@ -25,17 +25,17 @@ function Letter (char) {
 Letter.prototype.toString = function() {
     // If this letter has been guessed, display an underlying character on the CLI.
     if (this.visible === true) {
-        return this.char.toUpperCase();
+        return this.character.toUpperCase();
     }
     return "_";
 }
 
 // Letter.prototype.guess is a boolean value that stores whether that letter has been guessed yet
 // ==================================================================================
-Letter.prototype.guess = function(charGuess) {
+Letter.prototype.guess = function(characterGuess) {
 
     // A function that takes a character as an argument and checks it against the underlying character
-    if (charGuess.toUpperCase() === this.char.toUpperCase()) {
+    if (characterGuess.toUpperCase() === this.character.toUpperCase()) {
         // The user guesses this character correctly. 
         // Update this.visible to `true`, which will display an underlying character.
         this.visible = true;
@@ -46,11 +46,14 @@ Letter.prototype.guess = function(charGuess) {
     return false;
 };
 
-Letter.prototype.getSolution = function() {
-    return this.char;
+
+// Returns the underlying character in order to show the user the correct word
+Letter.prototype.showCharacter = function() {
+    return this.character;
   };
   
 
+// Exports Letter constructor so that Word.js can use it.
 module.exports = Letter;
 
 

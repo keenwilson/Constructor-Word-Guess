@@ -6,8 +6,8 @@ var Letter = require("./Letter");
 function Word (word) {
     // word.split("") separates each character in the word and return an array of the letters of the underlying word
     // .map returns an array containing the results of calling the Letter constructor on each letter 
-    this.letters = word.split("").map(function (char) {
-        return new Letter(char);
+    this.letters = word.split("").map(function (character) {
+        return new Letter(character);
     })
 };
 
@@ -26,10 +26,10 @@ Word.prototype.toString = function () {
 
 // Word.prototype.guessLetter takes a character as an argument and 
 // calls the guess function on each letter object to see whether that letter has been guessed yet
-Word.prototype.guessLetter = function (char) {
+Word.prototype.guessLetter = function (character) {
     var alreadyGuessed = false;
     this.letters.forEach(function (letter) {
-        if (letter.guess(char) === true) {
+        if (letter.guess(character) === true) {
             alreadyGuessed = true;
         }
     });
@@ -51,10 +51,11 @@ Word.prototype.guessedCorrectly = function () {
 Word.prototype.getSolution = function () {
     return this.letters.map(function (letter) {
         // Call the underlying characters and join them together
-        return letter.getSolution();
+        return letter.showCharacter();
     }).join("");
 };
 
+//Export the Word constructor so that we can use/reference it in game.js
 module.exports = Word;
 
 

@@ -1,30 +1,33 @@
-// The Game constructor depends on the Inquirer package, the ansi-colors package for text decoration, the Word constructor, and the list form Words
 const inquirer = require("inquirer");
 const c = require('ansi-colors');
 const Word = require("./Word");
-const words = require("./words");
+const wordsToPick = require("./wordsToPick");
 const Pizza = require("./pizza");
+const figlet = require("figlet");
+const boxen = require('boxen');
 
-// The Game constructor is used to track score and control the flow of the overall game.
+// The Game constructor is used to house all of overall game logic
 function Game() {
 
     // `self` gives access to the current Word { letters: [ Letter Object, Letter Object,...]}
-    var self = this;
+    const self = this;
     
-    // Sets the guesses to 10 and gets the next round
-    this.play = function () {
+    // When the game starts, reset number of guesses remaining to 10, empty an array of letters already guessed, and random a new word
+    this.playGame = function () {
         this.guessesRemaining = 10;
+        this.lettersAlreadyGuessed = [];
         this.newWord();
     };
 
     
     this.newWord = function () {
 
+        // Greeting message tells the user to guess a word in `Pizza toppings` category
         var pizza = new Pizza();
-
         console.log(`${pizza.emoji} ${pizza.emoji} ${pizza.emoji} Deliciously Popular Pizza Toppings ${pizza.emoji} ${pizza.emoji} ${pizza.emoji}`);
-        // Random a word from words.js
-        var randomWord = words[Math.floor(Math.random() * words.length)];
+        console.log(c.yellow("You have " + self.guessesRemaining + " guesses remaining to play! \n"));
+        // Random a word from wordsToPick.js
+        var randomWord = wordsToPick[Math.floor(Math.random() * wordsToPick.length)];
         // Creates a new Word object using a random word from the array
         this.currentWord = new Word(randomWord);
         
@@ -32,15 +35,19 @@ function Game() {
         this.makeGuess();
     };
 
+    // Starts with an empty array of Letters Already Guessed
+    // This property will be reset for every word played
+    this.lettersAlreadyGuessed = [];
+
     // Uses inquirer to prompt the user for their guess
     this.makeGuess = function () {
         console.log("\n" + this.currentWord + "\n");
-        this.askForLetter().then(function () {
+        this.guessLetter().then(function () {
             // If the user has no guesses remaining after this guess, , 
             if (self.guessesRemaining < 1) {
                 // Show the user the correct word
                 console.log(
-                    c.red("No guesses left! Word was: \"" + self.currentWord.getSolution() + "\"\n")
+                    c.yellow("No guesses left! The word was: \"" + self.currentWord.getSolution() + "\"\n")
                 );
                 // Ask if they want to start over
                 self.askToStartOver();
@@ -52,6 +59,8 @@ function Game() {
                 console.log(c.green(" You got it right. The answer is " + self.currentWord.getSolution() + "! \n Next word! \n\n"));
                 // Update guess remaining for the current user to 10
                 self.guessesRemaining = 10;
+                // Empty Letters Already Guessed
+                self.lettersAlreadyGuessed = [];
                 // Create a new Word object
                 self.newWord();
 
@@ -65,61 +74,81 @@ function Game() {
     };
 
 
-    // Asks the user if they want to play again after running out of guessesLeft
+    // After no guesses remaining, ask the user if they would like to play again.
     this.askToStartOver = function () {
         inquirer
             .prompt([
                 {
                     type: "confirm",
-                    name: "choice",
+                    name: "startOver",
                     message: "Start Over?"
                 }
             ])
-            .then(function (val) {
+            .then(function (userWantsTo) {
                 // If the user says yes, start the new game, otherwise quit the game
-                if (val.choice) {
-                    self.play();
+                if (userWantsTo.startOver) {
+                    // Runs playGame from the start once more if they do
+                    self.playGame();
                 }
                 else {
-                    self.quit();
+                    // End the program if they don't
+                    self.endGame();
                 }
             });
     };
 
     // Prompts the user for a letter
-    this.askForLetter = function () {
+    this.guessLetter = function () {
         return inquirer
             .prompt([
                 {
                     type: "input",
-                    name: "choice",
+                    name: "userGuess",
                     message: "Guess a letter!",
-                    validate: function (userInput) {
-                        // userInput must be a letter
-                        return /[a-zA-Z]/gi.test(userInput);
-                    }
+                    // Regular expression that input must be valid against.
+                    // In this case, userInput must be a letter
+                    pattern: /[a-zA-Z]/gi
                 }
             ])
-            .then(function (val) {
-                // If the user's guess is in the current word, log that they chose correctly
-                console.log("You have guessed " + c.bgCyan(" " + val.choice.toUppercase() + " "));
-                var didGuessCorrectly = self.currentWord.guessLetter(val.choice);
-                if (didGuessCorrectly) {
-                    console.log(c.bold.bgGreen("\nCORRECT!!!\n"));
+            .then(function (userInput) {
+                
+                // Add the user's guess in the letters already guessed
+                var userGuess = userInput.userGuess.toUpperCase()
+                console.log("You have guessed " + c.bgCyan(" " + userGuess + " "));
+
+                self.lettersAlreadyGuessed.push(userGuess);
+                console.log("Letters Already Guessed " + c.cyan(" " + self.lettersAlreadyGuessed + " "));
+
+
+                // If the letter the user are trying to guess is in the current word, log that they are CORRECT
+                var isCorrect = self.currentWord.guessLetter(userGuess);
+                if (isCorrect) {
+                    console.log(boxen(c.bold.green("\nCORRECT!!!\n"), {padding: 1, margin: 1, borderStyle: 'round'}));
                 }
                 else {
-                    // Otherwise decrement `guessesRemaining`, log that the answer is incorrect,
-                    // and display how many guesses remaining
+                    // Otherwiss, reduce guesses remaining by 1
                     self.guessesRemaining--;
-                    console.log(c.bold.bgRed("\nINCORRECT!!!\n"));
-                    console.log(c.inverse(self.guessesRemaining + " guesses remaining!!!\n"));
+                    //  tell user they are INCORRECT (letter is not in the word) and display how many guesses left
+                    console.log(boxen(c.bold.red("\nINCORRECT!!!\n" + c.inverse.yellow(" " + self.guessesRemaining + " guesses remaining!!! \n")), {padding: 1, margin: 1, borderStyle: 'round'}));
                 }
             });
     };
 
-    // Logs goodbye and exits the node app
-    this.quit = function () {
-        console.log(c.blue("\nGoodbye!"));
+    // Logs thanks and exits the node app
+    this.endGame = function () {
+        const pizza = new Pizza();
+
+        figlet("Goodbye", function(err, data) {
+            if (err) {
+                console.log('Something went wrong...');
+                console.dir(err);
+                return;
+            }
+            console.log(data)
+            console.log(c.yellow("\nThanks for playing! " + pizza.emoji));
+            
+        });
+        
         // The process.exit function exits from the current Node.js process.
         // It takes an exit code, which is an integer.
         // Node.js interprets non-zero codes as failure, and an exit code of 0 as success.
