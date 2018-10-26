@@ -33,13 +33,13 @@ Letter.prototype.toString = function() {
     return "_";
 }
 
-// Letter.prototype.guess is a boolean value that stores whether that letter has been guessed yet
+// Letter.prototype.didExistinCurrentWord is a boolean value that stores whether that guessed character exists in the current word
 // ==================================================================================
-Letter.prototype.beenGuessed = function(characterGuess) {
+Letter.prototype.didExistinCurrentWord = function(character) {
 
     // A function that takes a character as an argument and checks it against the underlying character
-    if (characterGuess.toUpperCase() === this.character.toUpperCase()) {
-        // The user guesses this character correctly. 
+    if (character.toUpperCase() === this.character.toUpperCase()) {
+        // The user guesses this character correctly (There is a guessed letter in the current word). 
         // Update this.active to `true`, which will display an underlying character.
         this.active = true;
         return true;
@@ -71,7 +71,7 @@ process.argv.splice(0,2);
 var t = new Letter("T")
 // When concatenating with a string, JavaScript automatically call `toString`
 console.log(t + '');
-t.visible = false;
+t.active = false;
 console.log(t + '');
 
 var h = new Letter("H")

@@ -24,24 +24,26 @@ Word.prototype.toString = function () {
     return this.letters.join(" ");
 };
 
-// Word.prototype.guessLetter takes a character as an argument and 
-// calls the beenGuessed function on the letter object to see whether that letter has been guessed yet
-Word.prototype.beenGuessedLetter = function (character) {
-    var alreadyGuessed = false;
-    this.letters.forEach(function (letter) {
-        if (letter.beenGuessed(character) === true) {
-            alreadyGuessed = true;
+// Word.prototype.hasThisLetter takes a character as an argument and 
+// calls the Letter.prototype.didExistinCurrentWord function on the letter object 
+// to see whether that guessed letter exists in the current word
+Word.prototype.hasThisLetter = function (userGuessCharacter) {
+    var hasThisLetter = false;
+    this.letters.forEach(function (letterInTheWord) {
+        if (letterInTheWord.didExistinCurrentWord(userGuessCharacter) === true) {
+            hasThisLetter = true;
         }
     });
 
-
-    // Return whether that letter has been guessed yet
-    return alreadyGuessed;
+    // Return whether that letter exists in the current word
+    return hasThisLetter;
 };
 
-// Word.prototype.guessedCorrectly returns `true` if all letters in the word have been guessed.
+// Word.prototype.guessedCorrectly returns `true` if all letters in the word have been guessed correctly.
 Word.prototype.guessedCorrectly = function () {
     return this.letters.every(function (letter) {
+        // If the value of letter.active on every letters are true,
+        // Word.prototype.guessedCorrectly will return `true`.
         return letter.active;
     });
 };
