@@ -3,15 +3,15 @@ A command-line (*CLI*) word guess game using `constructor` functions to create o
 
 ---
 ## How to Play
-
-![Welcome and ask to guess a letter](./screenshots/constructor-welcome.gif)
+* Once you install Node.js, clone this repository, and run `npm install`, you can start to play this game by running `node index.js` in your command line.
+    ![Welcome and ask to guess a letter](./screenshots/constructor-welcome.gif)
 * In this game, you will be given a certain amount of guesses. (10 or 20 depending on the level of difficulty)
 * For each word, you will be asked to guess an underlying character (A to Z).
-![Ask to guess a letter](./screenshots/constructor-word-guess-correct.gif)
+    ![Ask to guess a letter](./screenshots/constructor-word-guess-correct.gif)
 * If you guess matches the underlying characters of the word -- the game prints "Correct" and displays that character at its position(s) in the word.
-![Incorrect answer](./screenshots/constructor-incorrect.gif)
+    ![Incorrect answer](./screenshots/constructor-incorrect.gif)
 * If your guess does not match the underlying characters of the word -- the game prints "Incorrect" and reduces the amount of guesses remaining by 1.
-![Say no to start over](./screenshots/constructor-goodbye.gif)
+    ![Say no to start over](./screenshots/constructor-goodbye.gif)
 * The game ends when you get to 0 guesses remaining or have no guesses left. The game will ask if you want to play again.
 
 ---
