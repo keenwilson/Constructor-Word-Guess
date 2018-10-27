@@ -47,4 +47,4 @@ The game ends when you get to 0 guesses remaining or have no guesses left.
 ---
 ## Author
     
-[Keen Wilson](keenwilson.com)
+    [Keen Wilson](http://www.keenwilson.com)
