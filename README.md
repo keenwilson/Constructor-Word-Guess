@@ -3,11 +3,20 @@ A command-line (*CLI*) word guess game using `constructor` functions to create o
 
 ---
 ## How to Play
-In this game, you will be given a certain amount of guesses. (Perhaps: 10 or 20 depending on the level of difficulty)
+
+In this game, you will be given a certain amount of guesses. (10 or 20 depending on the level of difficulty)
 For each word, you will be asked to guess an underlying character (A to Z).
 If you guess matches the underlying characters of the word -- the game prints "Correct" and displays that character at its position(s) in the word.
 If your guess does not match the underlying characters of the word -- the game prints "Incorrect" and reduces the amount of guesses remaining by 1.
 The game ends when you get to 0 guesses remaining or have no guesses left.
+
+---
+## Technologies used
+* [Node.js](https://nodejs.org/en/)
+* JavaScript Object Constructors
+* [Inquirer package](https://www.npmjs.com/package/inquirer)
+* [Figlet package](https://www.npmjs.com/package/figlet)
+* [Boxen package](https://www.npmjs.com/package/boxen) 
 
 ---
 ## Modules
@@ -47,4 +56,4 @@ The game ends when you get to 0 guesses remaining or have no guesses left.
 ---
 ## Author
     
-    [Keen Wilson](http://www.keenwilson.com)
+[Keen Wilson](http://www.keenwilson.com)

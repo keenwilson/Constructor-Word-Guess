@@ -24,7 +24,8 @@ const boxen = require('boxen');
 // The Game constructor is used to create game object and house the game logic
 function Game() {
 
-    // `game` will gives access to the current Word objects { letters: [ Letter object, Letter object,...]}
+    // The value of this, when used in an object, is the object itself.
+    // `game` will gives access to the current Word object { letters: [ Letter object, Letter object,...]}
     const game = this;
 
     // Starts with an empty array of Letters Already Guessed
