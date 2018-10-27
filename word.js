@@ -50,7 +50,7 @@ Word.prototype.guessedCorrectly = function () {
 
 
 // Get the underlying characters in order to show the user the correct word
-Word.prototype.getSolution = function () {
+Word.prototype.getAnswer = function () {
     return this.letters.map(function (letter) {
         // Call the underlying characters and join them together
         return letter.showCharacter();

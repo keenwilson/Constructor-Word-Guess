@@ -4,11 +4,11 @@ A command-line (*CLI*) word guess game using `constructor` functions to create o
 ---
 ## How to Play
 
-In this game, you will be given a certain amount of guesses. (10 or 20 depending on the level of difficulty)
-For each word, you will be asked to guess an underlying character (A to Z).
-If you guess matches the underlying characters of the word -- the game prints "Correct" and displays that character at its position(s) in the word.
-If your guess does not match the underlying characters of the word -- the game prints "Incorrect" and reduces the amount of guesses remaining by 1.
-The game ends when you get to 0 guesses remaining or have no guesses left.
+* In this game, you will be given a certain amount of guesses. (10 or 20 depending on the level of difficulty)
+* For each word, you will be asked to guess an underlying character (A to Z).
+* If you guess matches the underlying characters of the word -- the game prints "Correct" and displays that character at its position(s) in the word.
+* If your guess does not match the underlying characters of the word -- the game prints "Incorrect" and reduces the amount of guesses remaining by 1.
+* The game ends when you get to 0 guesses remaining or have no guesses left.
 
 ---
 ## Technologies used
@@ -37,7 +37,7 @@ The game ends when you get to 0 guesses remaining or have no guesses left.
         * `prototype.toString`: Method for all Word objects on the protoype which returns a string representing the word. Because we name a function `toString`, JavaScript automatically call `toString` on each letter, then joins them together even if we don't call `toString` separately. In this app, `Word.prototype.toString`. call the `letters` method on each letter object that will display either the underlying character or an underscore, then `.join(" ")` concatenates those letters/placeholders together
         * `prototype.hasThisLetter`: Method for all Word objects on the protoype which takes a character as an argument and calls the `Letter.prototype.didExistinCurrentWord` function on the letter object to see whether that guessed letter exists in the current word. This method will return a boolean (`true` or `false`) value
         * `prototype.guessedCorrectly`: Method for all Word objects on the protoype which returns `true` if all letters in the word have been guessed correctly
-        *`prototype.getSolution`: Method for all Word objects on the protoype which calls the underlying characters and join them together in order to show the user the correct answer
+        *`prototype.getAnswer`: Method for all Word objects on the protoype which calls the underlying characters and join them together in order to show the user the correct answer
 * **Game**
     * The Game constructor is used to create a game object and house the game logic.
     * The Game module is a constructor function with the following properties and methods: 

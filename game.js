@@ -44,7 +44,7 @@ function Game() {
 
         // Greeting message tells the user to guess a word in `Pizza toppings` category
         var pizza = new Pizza();
-        console.log(boxen((`${pizza.emoji} ${pizza.emoji} ${pizza.emoji} Deliciously Popular Pizza Toppings ${pizza.emoji} ${pizza.emoji} ${pizza.emoji}`), { padding: 1, margin: 1, borderStyle: 'round' }));
+        console.log(boxen((`${pizza.emoji} ${pizza.emoji} ${pizza.emoji} Category: Deliciously Popular Pizza Toppings ${pizza.emoji} ${pizza.emoji} ${pizza.emoji}`), { padding: 1, margin: 1, borderStyle: 'round' }));
         console.log(c.yellow("\nYou have " + game.guessesRemaining + " guesses remaining to play! \n"));
         // Random a word from wordsToPick.js
         var randomWord = wordsToPick[Math.floor(Math.random() * wordsToPick.length)];
@@ -90,11 +90,9 @@ function Game() {
                 // Add the user's guess in the letters already guessed
                 var userGuess = answer.userGuess.toUpperCase()
                 console.log("You have guessed " + c.bgCyan(" " + userGuess + " "));
-
                 game.lettersAlreadyGuessed.push(userGuess);
                 console.log("Letters Already Guessed " + c.cyan(" " + game.lettersAlreadyGuessed + " "));
-
-
+              
                 // If the letter the user are trying to guess is in the current word, log that they are CORRECT
                 var isCorrect = game.currentWord.hasThisLetter(userGuess);
                 if (isCorrect) {
@@ -115,13 +113,13 @@ function Game() {
         // If the user has no guesses remaining after this guess, , 
         if (game.guessesRemaining < 1) {
             // Show the user the correct word
-            console.log(c.yellow("No guesses left! The word was: \"" + self.currentWord.getSolution() + "\"\n"));
-            // Create a prompt to ask if the user want to start over
+            console.log(boxen(c.yellow(" No guesses left! The word was '" + game.currentWord.getAnswer() + "' \n\n"), {padding: 1, margin: 1, borderStyle: 'double'}));
+            // Ask if the user wants to play again
             game.askIfStartOver();
         }
         else if (game.currentWord.guessedCorrectly()) {
             // If the user guessed all letters of the current word correctly, reset guessesLeft to 10 and get the next word
-            console.log(c.green(" You got it right. The answer is " + game.currentWord.getSolution() + "! \n Next word! \n\n"));
+            console.log(boxen(c.green(" You got it right. The answer is '" + game.currentWord.getAnswer() + "' \n\n Next word!"), {padding: 1, margin: 1, borderStyle: 'double'}));
             // Empty Letters Already Guessed
             game.lettersAlreadyGuessed = [];
             // Create a new Word object
