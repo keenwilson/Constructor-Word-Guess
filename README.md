@@ -45,13 +45,13 @@ A command-line (*CLI*) word guess game using `constructor` functions to create o
 * **Game**
     * The Game constructor is used to create a game object and house the game logic.
     * The Game module is a constructor function with the following properties and methods: 
-            * `playGame`: Method which, when the game starts, will reset number of guesses remaining to 10, empty an array of letters already guessed, and random a new word for the user to play
-            * `newWord`: Method which tells the user to guess a word in `Pizza toppings` category, randoms a word from `wordsToPick.js`, creates a new `Word` object using that random word, and runs `makeGuess`
-            * `makeGuess`: Method which shows the current status of the word in a box, prompts the user to guess a letter using `guessALetter` method, and then checks if the user has any guesses remaining using `checkRound`
-            *`guessALetter`: Method which prompts the user to guess a letter using the `inquirer` package, checks if the user guess correctly, then displays either "CORRECT" or "INCORRECT"
-            *`checkRound`: Method which checks if the user has any guesses remaining
-            *`askIfStartOver`: Method which asks the user if they would like to play again
-            *`endGame`: Method which exits from the current Node.js process by using `process.exit(0)`
+        * `playGame`: Method which, when the game starts, will reset number of guesses remaining to 10, empty an array of letters already guessed, and random a new word for the user to play
+        * `newWord`: Method which tells the user to guess a word in `Pizza toppings` category, randoms a word from `wordsToPick.js`, creates a new `Word` object using that random word, and runs `makeGuess`
+        * `makeGuess`: Method which shows the current status of the word in a box, prompts the user to guess a letter using `guessALetter` method, and then checks if the user has any guesses remaining using `checkRound
+        * `guessALetter`: Method which prompts the user to guess a letter using the `inquirer` package, checks if the user guess correctly, then displays either "_CORRECT_" or "_INCORRECT_"
+        * `checkRound`: Method which checks if the user has any guesses remaining
+        * `askIfStartOver`: Method which asks the user if they would like to play again
+        * `endGame`: Method which exits from the current Node.js process by using `process.exit(0)`
 * **WordsToPick**
     * The WordsToPick module is an array of all words that can be chosen. In this app, these words are belong to **Delicously Popular Pizza Toppings**
 * **Pizza**
